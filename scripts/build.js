@@ -20,24 +20,14 @@ const themeBootScript = `(function () {
       document.documentElement.dataset.theme = t;
     })();`;
 
-const headerHTML = `<header class="site-header">
-    <a class="brand" href="/">greg chinnici</a>
-    <nav>
-      <a href="/blog/">blog</a>
-    </nav>
-    <button data-theme-toggle aria-label="cycle theme">
-      <span data-theme-label></span>
-    </button>
-  </header>`;
-
-const footerHTML = `<footer class="site-footer">
-    <p class="muted">built static. <a href="https://github.com/greg-chinnici">github</a></p>
-  </footer>`;
-
-function shell({ title, body, currentBlog = false }) {
+// `prefix` is the relative path from the page back to public/ root.
+// '' for root pages, '../' for /blog/index.html, '../../' for /blog/<slug>/index.html.
+// using relative paths keeps the site working under any base (user-page or project-page).
+function shell({ title, body, currentBlog = false, prefix, extraScripts = [] }) {
   const navBlog = currentBlog
-    ? `<a href="/blog/" aria-current="page">blog</a>`
-    : `<a href="/blog/">blog</a>`;
+    ? `<a href="${prefix}blog/" aria-current="page">blog</a>`
+    : `<a href="${prefix}blog/">blog</a>`;
+  const scripts = extraScripts.map(s => `  <script src="${prefix}js/${s}"></script>`).join('\n');
   return `<!doctype html>
 <html lang="en" data-theme="light">
 <head>
@@ -47,19 +37,30 @@ function shell({ title, body, currentBlog = false }) {
   <script>
     ${themeBootScript}
   </script>
-  <link rel="stylesheet" href="/css/themes.css">
-  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="${prefix}css/themes.css">
+  <link rel="stylesheet" href="${prefix}css/base.css">
 </head>
 <body>
-  ${headerHTML.replace('<a href="/blog/">blog</a>', navBlog)}
+  <header class="site-header">
+    <a class="brand" href="${prefix || './'}">greg chinnici</a>
+    <nav>
+      ${navBlog}
+    </nav>
+    <button data-theme-toggle aria-label="cycle theme">
+      <span data-theme-label></span>
+    </button>
+  </header>
 
   <main>
 ${body}
   </main>
 
-  ${footerHTML}
+  <footer class="site-footer">
+    <p class="muted">built static. <a href="https://github.com/greg-chinnici">github</a></p>
+  </footer>
 
-  <script src="/js/theme.js"></script>
+  <script src="${prefix}js/theme.js"></script>
+${scripts}
 </body>
 </html>
 `;
@@ -109,7 +110,7 @@ ${html}
 
   const dstDir = join(OUT, slug);
   await mkdir(dstDir, { recursive: true });
-  await writeFile(join(dstDir, 'index.html'), shell({ title: `${title} · greg chinnici`, body }));
+  await writeFile(join(dstDir, 'index.html'), shell({ title: `${title} · greg chinnici`, body, prefix: '../../' }));
   await copyAssets(srcDir, dstDir);
 
   return { slug, title, date, summary: data.summary || '' };
@@ -118,25 +119,38 @@ ${html}
 async function buildIndex(posts) {
   posts.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
   const items = posts.length
-    ? posts.map(p => `        <li>
-          <a href="/blog/${p.slug}/">${p.title}</a>
+    ? posts.map(p => `        <li data-date="${p.date || ''}">
+          <a href="${p.slug}/">${p.title}</a>
           ${p.date ? `<span class="muted stamp"> · ${p.date}</span>` : ''}
           ${p.summary ? `<p class="muted">${p.summary}</p>` : ''}
         </li>`).join('\n')
     : `        <li class="muted">no posts yet.</li>`;
 
+  const sortControls = posts.length > 1 ? `
+      <div class="post-list-controls">
+        <button data-sort-toggle aria-label="toggle sort order">
+          <span data-sort-label>newest first</span>
+        </button>
+      </div>` : '';
+
   const body = `    <section class="intro">
       <h1>blog</h1>
     </section>
 
-    <section>
+    <section>${sortControls}
       <ul class="post-list" data-post-list>
 ${items}
       </ul>
     </section>`;
 
   await mkdir(OUT, { recursive: true });
-  await writeFile(join(OUT, 'index.html'), shell({ title: 'blog · greg chinnici', body, currentBlog: true }));
+  await writeFile(join(OUT, 'index.html'), shell({
+    title: 'blog · greg chinnici',
+    body,
+    currentBlog: true,
+    prefix: '../',
+    extraScripts: posts.length > 1 ? ['blog.js'] : [],
+  }));
 }
 
 async function exists(p) {

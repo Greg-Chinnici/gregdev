@@ -116,6 +116,22 @@ h2 { font-size: 1.25rem; margin: 0 0 1rem; }
   padding: 0.75rem 0;
   border-bottom: 1px solid var(--border);
 }
+.post-list-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+}
+[data-sort-toggle] {
+  background: var(--bg-elev);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  padding: 0.3rem 0.7rem;
+  font: inherit;
+  font-size: 0.8em;
+  cursor: pointer;
+  border-radius: 4px;
+}
+[data-sort-toggle]:hover { border-color: var(--accent); }
 
 .site-footer {
   padding: 1.5rem 2rem;
