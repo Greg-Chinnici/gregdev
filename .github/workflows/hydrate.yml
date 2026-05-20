@@ -12,14 +12,23 @@ jobs:
   hydrate:
     runs-on: ubuntu-latest
     steps:
-      - name: clone repo
+      - name: checkout main (for scripts)
+        uses: actions/checkout@v4
+        with:
+          path: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: clone repo for data branch
         run: |
           git config --global user.name "hydrate-bot"
           git config --global user.email "actions@github.com"
-          git clone "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" repo
+          git clone "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" data-repo
 
       - name: checkout or init data branch
-        working-directory: repo
+        working-directory: data-repo
         run: |
           if git ls-remote --exit-code --heads origin data; then
             git checkout data
@@ -28,31 +37,12 @@ jobs:
             git rm -rf . 2>/dev/null || true
           fi
 
-      # ──────────────────────────────────────────────────────────────
-      # add fetch steps here. each writes a JSON file into ./repo/
-      # and appends an entry to the sources array below.
-      # use `continue-on-error: true` so one failure doesn't block others.
-      # example:
-      #   - name: fetch github
-      #     working-directory: repo
-      #     continue-on-error: true
-      #     env:
-      #       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     run: ./scripts/fetch-github.sh > github.json
-      # ──────────────────────────────────────────────────────────────
-
-      - name: write manifest
-        working-directory: repo
-        run: |
-          cat > manifest.json <<EOF
-          {
-            "updated": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-            "sources": []
-          }
-          EOF
+      - name: run hydrate
+        working-directory: data-repo
+        run: node ../main/scripts/hydrate.js
 
       - name: commit & push if changed
-        working-directory: repo
+        working-directory: data-repo
         run: |
           git add -A
           if git diff --cached --quiet; then
