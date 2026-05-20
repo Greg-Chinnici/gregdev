@@ -79,6 +79,34 @@ main section { margin-bottom: 3rem; }
 h1 { font-size: 2rem; margin: 0 0 0.5rem; }
 h2 { font-size: 1.25rem; margin: 0 0 1rem; }
 
+.logo-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0;
+}
+.logo-track a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--fg-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.logo-track a:hover,
+.logo-track a:focus { color: var(--accent); text-decoration: none; }
+.logo-track svg {
+  width: 32px;
+  height: 32px;
+  fill: currentColor;
+}
+.logo-track span { font-size: 0.8em; }
+
 .post-list {
   list-style: none;
   padding: 0;

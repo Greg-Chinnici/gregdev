@@ -1,4 +1,4 @@
-const THEMES = ['light', 'dark', 'amber', 'mono'];
+const THEMES = ['light', 'dark', 'tokyo-night', 'mono'];
 const root = document.documentElement;
 
 function setTheme(t) {
