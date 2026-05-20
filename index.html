@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>greg chinnici</title>
+  <script>
+    (function () {
+      var t = localStorage.getItem('theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+  <link rel="stylesheet" href="/css/themes.css">
+  <link rel="stylesheet" href="/css/base.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">greg chinnici</a>
+    <nav>
+      <a href="/blog/">blog</a>
+    </nav>
+    <button data-theme-toggle aria-label="cycle theme">
+      <span data-theme-label></span>
+    </button>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h1>hi.</h1>
+      <p>placeholder intro. swap this for a real one.</p>
+    </section>
+
+    <section class="hydrated" data-source="manifest">
+      <h2>activity</h2>
+      <div data-hydrate-target>
+        <p class="muted">no data sources configured yet.</p>
+      </div>
+      <p class="stamp muted" data-updated></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="muted">built static. <a href="https://github.com/greg-chinnici">github</a></p>
+  </footer>
+
+  <script src="/js/theme.js"></script>
+  <script src="/js/hydrate.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+/* theme presets — each block overrides the same variable set.
+   to add a theme: copy a block, change the selector, tweak values,
+   and append the name to THEMES in /js/theme.js. */
+
+:root,
+[data-theme="light"] {
+  --bg:        #fafafa;
+  --bg-elev:   #ffffff;
+  --fg:        #1a1a1a;
+  --fg-muted:  #6a6a6a;
+  --accent:    #2a6df4;
+  --border:    #e3e3e3;
+  --code-bg:   #f0f0f0;
+}
+
+[data-theme="dark"] {
+  --bg:        #0f1115;
+  --bg-elev:   #171a20;
+  --fg:        #e6e6e6;
+  --fg-muted:  #8a8f99;
+  --accent:    #7aa2f7;
+  --border:    #262a33;
+  --code-bg:   #1c1f26;
+}
+
+[data-theme="amber"] {
+  --bg:        #1a1208;
+  --bg-elev:   #221808;
+  --fg:        #ffb86b;
+  --fg-muted:  #a07840;
+  --accent:    #ffd166;
+  --border:    #3a2810;
+  --code-bg:   #2a1c0a;
+}
+
+[data-theme="mono"] {
+  --bg:        #ffffff;
+  --bg-elev:   #ffffff;
+  --fg:        #000000;
+  --fg-muted:  #444444;
+  --accent:    #000000;
+  --border:    #000000;
+  --code-bg:   #f4f4f4;
+}
