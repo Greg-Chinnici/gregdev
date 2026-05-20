@@ -133,6 +133,91 @@ h2 { font-size: 1.25rem; margin: 0 0 1rem; }
 }
 [data-sort-toggle]:hover { border-color: var(--accent); }
 
+.post-header { margin-bottom: 2rem; }
+.post-header h1 { margin-bottom: 0.25rem; }
+.post-header .stamp { margin-top: 0; }
+
+.post h1 { font-size: 1.75rem; margin: 2rem 0 0.75rem; line-height: 1.25; }
+.post h2 { font-size: 1.4rem;  margin: 2rem 0 0.75rem; line-height: 1.3; }
+.post h3 { font-size: 1.15rem; margin: 1.5rem 0 0.5rem; }
+.post h4 { font-size: 1rem;    margin: 1.25rem 0 0.5rem; }
+.post h5,
+.post h6 { font-size: 0.95em; margin: 1rem 0 0.5rem; color: var(--fg-muted); }
+.post-header > h1:first-child { margin-top: 0; }
+
+.post p { margin: 0 0 1rem; }
+.post strong { font-weight: 600; }
+.post em { font-style: italic; }
+
+.post ul,
+.post ol { margin: 0 0 1rem; padding-left: 1.5rem; }
+.post li { margin: 0.25rem 0; }
+.post li > ul,
+.post li > ol { margin: 0.25rem 0; }
+
+.post blockquote {
+  margin: 1rem 0;
+  padding: 0.25rem 1rem;
+  border-left: 3px solid var(--border);
+  color: var(--fg-muted);
+}
+.post blockquote p:last-child { margin-bottom: 0; }
+
+.post pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.85rem 1rem;
+  margin: 0 0 1rem;
+  overflow-x: auto;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+.post pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  font-size: 1em;
+  color: inherit;
+}
+
+.post hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+.post img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  display: block;
+  margin: 1rem auto;
+}
+
+.post table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1rem;
+  font-size: 0.95em;
+}
+.post th,
+.post td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+.post th { font-weight: 600; background: var(--bg-elev); }
+
+.post kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0.05em 0.4em;
+  font-size: 0.85em;
+}
+
 .site-footer {
   padding: 1.5rem 2rem;
   border-top: 1px solid var(--border);
