@@ -1,6 +1,9 @@
 /* theme presets — each block overrides the same variable set.
    to add a theme: copy a block, change the selector, tweak values,
-   and append the name to THEMES in /js/theme.js. */
+   and append the name to THEMES in /js/theme.js.
+
+   post heading vars (--post-h1 … --post-h6) default to --fg so headings
+   in rendered markdown blend in; override per-theme to colorize them. */
 
 :root,
 [data-theme="light"] {
@@ -11,6 +14,13 @@
   --accent:    #2a6df4;
   --border:    #e3e3e3;
   --code-bg:   #f0f0f0;
+
+  --post-h1:   var(--fg);
+  --post-h2:   var(--fg);
+  --post-h3:   var(--fg);
+  --post-h4:   var(--fg);
+  --post-h5:   var(--fg-muted);
+  --post-h6:   var(--fg-muted);
 }
 
 [data-theme="dark"] {
@@ -21,6 +31,13 @@
   --accent:    #7aa2f7;
   --border:    #262a33;
   --code-bg:   #1c1f26;
+
+  --post-h1:   var(--fg);
+  --post-h2:   var(--fg);
+  --post-h3:   var(--fg);
+  --post-h4:   var(--fg);
+  --post-h5:   var(--fg-muted);
+  --post-h6:   var(--fg-muted);
 }
 
 [data-theme="tokyo-night"] {
@@ -31,6 +48,14 @@
   --accent:    #bb9af7;
   --border:    #414868;
   --code-bg:   #1f2335;
+
+  /* tokyo-night palette mapped to heading levels */
+  --post-h1:   #7aa2f7; /* blue   */
+  --post-h2:   #7dcfff; /* cyan   */
+  --post-h3:   #9ece6a; /* green  */
+  --post-h4:   #e0af68; /* yellow */
+  --post-h5:   #ff9e64; /* orange */
+  --post-h6:   #f7768e; /* red    */
 }
 
 [data-theme="mono"] {
@@ -41,4 +66,11 @@
   --accent:    #000000;
   --border:    #000000;
   --code-bg:   #f4f4f4;
+
+  --post-h1:   var(--fg);
+  --post-h2:   var(--fg);
+  --post-h3:   var(--fg);
+  --post-h4:   var(--fg);
+  --post-h5:   var(--fg);
+  --post-h6:   var(--fg);
 }
