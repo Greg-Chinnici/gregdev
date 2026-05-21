@@ -1,0 +1,97 @@
+
+    #resume {
+      width: min(940px, calc(100vw - 4rem));
+      margin-left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .resume-grid {
+      display: grid;
+      grid-template-columns: 11rem 1fr;
+      gap: 0 2rem;
+      margin-top: 1.25rem;
+    }
+
+    @media (max-width: 600px) {
+      #resume { width: auto; margin-left: 0; transform: none; }
+      .resume-grid { grid-template-columns: 1fr; }
+      .resume-label { margin-top: 1.5rem; margin-bottom: 0.2rem; text-align: left; }
+    }
+
+    .resume-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.45;
+      padding-top: 0.2rem;
+      line-height: 1.4;
+      text-align: right;
+    }
+
+    .resume-body { }
+
+    /* Entry = one job / degree */
+    .resume-entry { margin-bottom: 1.5rem; }
+    .resume-entry:last-child { margin-bottom: 0; }
+
+    .resume-entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.25rem 1rem;
+    }
+
+    .resume-entry-title { font-weight: 600; }
+
+    .resume-entry-date {
+      font-size: 0.75rem;
+      opacity: 0.45;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .resume-entry-org {
+      opacity: 0.6;
+      font-size: 0.9rem;
+      margin: 0.1rem 0 0.4rem;
+    }
+
+    .resume-entry ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      font-size: 0.92rem;
+      opacity: 0.8;
+    }
+
+    .resume-entry li { margin-bottom: 0.2rem; }
+
+    /* Skills row */
+    .resume-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 2.5rem;
+    }
+
+    .resume-skill-group-name {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      margin-bottom: 0.2rem;
+    }
+
+    .resume-skill-list {
+      font-size: 0.92rem;
+      opacity: 0.8;
+      line-height: 1.7;
+    }
+
+    /* Thin rule between resume blocks */
+    .resume-rule {
+      border: none;
+      border-top: 1px solid;
+      opacity: 0.1;
+      margin: 1.5rem 0;
+      grid-column: 1 / -1;
+    }

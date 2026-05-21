@@ -13,6 +13,8 @@
   </script>
   <link rel="stylesheet" href="css/themes.css">
   <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/resume.css">
+  
 </head>
 <body>
   <header class="site-header">
@@ -31,7 +33,219 @@
       <p>placeholder intro. swap this for a real one.</p>
     </section>
 
-    
+    <!-- ── Resume ──────────────────────────────────────── -->
+    <section id="resume">
+      <h2>resume</h2>
+
+      <div class="resume-grid">
+
+        <!-- Experience -->
+        <span class="resume-label">experience</span>
+        <div class="resume-body">
+
+          <div class="resume-entry">
+            <div class="resume-entry-header">
+              <span class="resume-entry-title">Software Engineer</span>
+              <span class="resume-entry-date">June 2025 — present</span>
+            </div>
+            <p class="resume-entry-org">90Meter</p>
+            <ul>
+              <li>Develop cross-platform C# apps for managing PKI tokens for both private sector and government.</li>
+              <li>Maintain a 1M+ line Java codebase (Red Hat Linux Dogtag CA fork).</li>
+              <li>Built and owned a C# tool for migrating certificates between CA providers for 50,000 FBI users.</li>
+            </ul>
+          </div>
+
+          <div class="resume-entry">
+            <div class="resume-entry-header">
+              <span class="resume-entry-title">User Research Participant</span>
+              <span class="resume-entry-date">Feb. 2026</span>
+            </div>
+            <p class="resume-entry-org">Activision</p>
+            <ul>
+              <li>Tested an unreleased game and gave meaningful feedback through surveys and talks with devs.</li>
+            </ul>
+          </div>
+
+          <div class="resume-entry">
+            <div class="resume-entry-header">
+              <span class="resume-entry-title">Closed Alpha Playtester</span>
+              <span class="resume-entry-date">Aug. 2021</span>
+            </div>
+            <p class="resume-entry-org">Ubisoft · XDefiant</p>
+            <ul>
+              <li>Tested early gamemodes and maps for XDefiant.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <hr class="resume-rule">
+
+        <!-- Projects -->
+        <span class="resume-label">projects</span>
+        <div class="resume-body">
+
+          <div class="resume-entry">
+            <div class="resume-entry-header">
+              <span class="resume-entry-title">Matchmaking Service</span>
+              <span class="resume-entry-date">Feb. 2026</span>
+            </div>
+            <p class="resume-entry-org">Personal Project · Go</p>
+            <ul>
+              <li>Built an abstract matchmaking service in Go based on the Glicko-2 rating system.</li>
+              <li>Optimized with an in-memory B-tree and a dockerized Postgres DB.</li>
+              <li>Configurable for lobby sizes, team counts, and team-balancing implementations.</li>
+            </ul>
+          </div>
+
+          <div class="resume-entry">
+            <div class="resume-entry-header">
+              <span class="resume-entry-title">GLASS</span>
+              <span class="resume-entry-date">Feb. — May 2025</span>
+            </div>
+            <p class="resume-entry-org">Capstone · Unity / C#</p>
+            <ul>
+              <li>Developed a 3D first-person shooter in Unity and C#; recognized as a semi-finalist at IEEE GameSig.</li>
+              <li>Designed 5 weapons and 6 levels, contributing to core gameplay mechanics and player experience.</li>
+              <li>Used Mirror to create a fully networked multiplayer game of up to 12 players with region-specific servers.</li>
+            </ul>
+          </div>
+
+          <div class="resume-entry">
+            <div class="resume-entry-header">
+              <span class="resume-entry-title">AutoNews Show</span>
+              <span class="resume-entry-date">Apr. 2025</span>
+            </div>
+            <p class="resume-entry-org">PantherHacks · AI Track Winner</p>
+            <ul>
+              <li>Built an LLM pipeline that ingests 11 news RSS feeds, summarized by Ollama to create broadcast scripts.</li>
+              <li>Used the Google Cloud SDK to batch-synthesize voice clips into an asset folder with script metadata.</li>
+              <li>Created an interactive Unity broadcast show with 2–4 procedurally animated characters.</li>
+            </ul>
+          </div>
+
+          <div class="resume-entry">
+            <div class="resume-entry-header">
+              <span class="resume-entry-title">Captain Coral's Fintastic Spelling Adventure</span>
+              <span class="resume-entry-date">Feb. — Apr. 2024</span>
+            </div>
+            <p class="resume-entry-org">Class Project · Unity / C#</p>
+            <ul>
+              <li>Developed a cross-platform educational kids' game in Unity and C# with the Universal Render Pipeline.</li>
+              <li>Built a web scraper to analyze and verify the difficulty of over 300,000 words.</li>
+              <li>Implemented a scalable ScriptableObject architecture to manage data for 50+ fish objects.</li>
+            </ul>
+          </div>
+
+          <div class="resume-entry">
+            <div class="resume-entry-header">
+              <span class="resume-entry-title">Game Design Documents</span>
+              <span class="resume-entry-date">Aug. 2023 — present</span>
+            </div>
+            <ul>
+              <li><em>Call of Duty Concepts</em> — systems and equipment ideas drawn from years of experience.</li>
+              <li><em>Danny's Inferno</em> — single-player FPS; a kid dreams of becoming a firefighter.</li>
+              <li><em>Spy Guy</em> — third-person dystopian magic story game.</li>
+              <li><em>Captain Coral's Fintastic Adventure</em> — Duck Hunt meets Scrabble.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <hr class="resume-rule">
+
+        <!-- Education -->
+        <span class="resume-label">education</span>
+        <div class="resume-body">
+
+          <div class="resume-entry">
+            <div class="resume-entry-header">
+              <span class="resume-entry-title">B.S. Computer Science</span>
+              <span class="resume-entry-date">May 2025</span>
+            </div>
+            <p class="resume-entry-org">Chapman University · Minor in Game Development Programming</p>
+            <ul>
+              <li>Coursework: Networks and Security, Computer Graphics, Agile Software Development, Game Industry Business.</li>
+              <li>Dean's List: Fall 2022, Spring 2023, Fall 2023, Spring 2024.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <hr class="resume-rule">
+
+        <!-- Skills -->
+        <span class="resume-label">skills</span>
+        <div class="resume-body">
+          <div class="resume-skills">
+
+            <div>
+              <p class="resume-skill-group-name">Languages</p>
+              <p class="resume-skill-list">C# · Python · C++<br>Java · Go · SQL · OpenGL</p>
+            </div>
+
+            <div>
+              <p class="resume-skill-group-name">Software</p>
+              <p class="resume-skill-list">DotPeek · Rider · DataGrip<br>GitHub · Photoshop · Plastic SCM<br>Azure · NixOS · RHEL8<br>Docker · Google Cloud · xUnit</p>
+            </div>
+
+            <div>
+              <p class="resume-skill-group-name">Engines / Tools</p>
+              <p class="resume-skill-list">Unity · Unreal<br>Confluence · Jira<br>Black Ops 3 Mod Tools · Radiant</p>
+            </div>
+
+          </div>
+        </div>
+
+        <hr class="resume-rule">
+
+        <!-- Awards -->
+        <span class="resume-label">awards</span>
+        <div class="resume-body">
+
+          <div class="resume-entry">
+            <div class="resume-entry-header">
+              <span class="resume-entry-title">PantherHacks — AI Track Winner</span>
+              <span class="resume-entry-date">April 2025</span>
+            </div>
+          </div>
+
+          <div class="resume-entry">
+            <div class="resume-entry-header">
+              <span class="resume-entry-title">IEEE GameSig Semi-Finalist (2×)</span>
+              <span class="resume-entry-date">May 2024, May 2025</span>
+            </div>
+          </div>
+
+          <div class="resume-entry">
+            <div class="resume-entry-header">
+              <span class="resume-entry-title">DEFCON 32 Black Badge — Octopus Game Winner</span>
+              <span class="resume-entry-date">August 2024</span>
+            </div>
+          </div>
+
+          <div class="resume-entry">
+            <div class="resume-entry-header">
+              <span class="resume-entry-title">Call of Duty — Iridescent / Top 250 (5 seasons)</span>
+              <span class="resume-entry-date">2016 — 2025</span>
+            </div>
+            <p class="resume-entry-org">7 Gamebattles Gold · 20 Gamebattles Silver</p>
+          </div>
+
+          <div class="resume-entry">
+            <div class="resume-entry-header">
+              <span class="resume-entry-title">Eagle Scout</span>
+              <span class="resume-entry-date">September 2020</span>
+            </div>
+            <p class="resume-entry-org">Boy Scouts of America</p>
+          </div>
+
+        </div>
+
+      </div><!-- /resume-grid -->
+    </section>
+    <!-- ── /Resume ─────────────────────────────────────── -->
 
     <section class="hydrated" data-source="manifest">
       <h2>activity</h2>
@@ -65,6 +279,5 @@
 
   <script src="js/theme.js"></script>
   <script src="js/hydrate.js"></script>
-  
 </body>
 </html>
