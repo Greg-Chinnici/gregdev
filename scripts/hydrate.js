@@ -21,7 +21,7 @@ const SOURCES = [
         temperature_unit: 'fahrenheit',
         precipitation_unit: 'inch',
         timezone: 'America/Los_Angeles',
-        forecast_days: '7',
+        forecast_days: '3',
       });
       const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`);
       if (!res.ok) throw new Error(`open-meteo ${res.status}`);
