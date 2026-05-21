@@ -2,7 +2,7 @@
   "place": "Newport Beach, CA",
   "latitude": 33.624027,
   "longitude": -117.91571,
-  "generationtime_ms": 884.0857744216919,
+  "generationtime_ms": 0.27489662170410156,
   "utc_offset_seconds": -25200,
   "timezone": "America/Los_Angeles",
   "timezone_abbreviation": "GMT-7",
@@ -16,24 +16,24 @@
   },
   "daily": {
     "time": [
-      "2026-05-20",
       "2026-05-21",
-      "2026-05-22"
+      "2026-05-22",
+      "2026-05-23"
     ],
     "weather_code": [
-      2,
-      3,
-      45
+      1,
+      45,
+      0
     ],
     "temperature_2m_max": [
-      75.5,
       69.2,
-      69.8
+      65.3,
+      75.6
     ],
     "temperature_2m_min": [
-      61.3,
-      58.3,
-      57.5
+      58.2,
+      57.7,
+      61.7
     ],
     "precipitation_sum": [
       0,
