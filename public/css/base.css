@@ -1,5 +1,9 @@
 *, *::before, *::after { box-sizing: border-box; }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -39,6 +43,7 @@ code {
   gap: 1.5rem;
   padding: 1rem 2rem;
   border-bottom: 1px solid var(--border);
+  background-color:   var(--bg);
 }
 .site-header .brand {
   font-weight: 600;

@@ -1,8 +1,7 @@
-
-    #resume {
-      width: min(940px, calc(100vw - 4rem));
-      margin-left: 50%;
-      transform: translateX(-50%);
+    /* On the homepage, widen main to the resume's width so the intro,
+       resume, and activity headers all start at the same left edge. */
+    main:has(#resume) {
+      max-width: 940px;
     }
 
     .resume-grid {
@@ -12,8 +11,7 @@
       margin-top: 1.25rem;
     }
 
-    @media (max-width: 600px) {
-      #resume { width: auto; margin-left: 0; transform: none; }
+    @media (max-width: 700px) {
       .resume-grid { grid-template-columns: 1fr; }
       .resume-label { margin-top: 1.5rem; margin-bottom: 0.2rem; text-align: left; }
     }
@@ -87,7 +85,7 @@
       line-height: 1.7;
     }
 
-    /* Thin rule between resume blocks */
+    /* Thin rule between resume blocks; spans both columns of the outer grid. */
     .resume-rule {
       border: none;
       border-top: 1px solid;
