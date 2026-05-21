@@ -10,18 +10,25 @@
 import { writeFile } from 'node:fs/promises';
 
 const SOURCES = [
-  // example:
-  // {
-  //   kind: 'github',
-  //   file: 'github.json',
-  //   async fetch() {
-  //     const res = await fetch('https://api.github.com/users/greg-chinnici/events/public', {
-  //       headers: { 'user-agent': 'gregdev-hydrate' },
-  //     });
-  //     if (!res.ok) throw new Error(`github ${res.status}`);
-  //     return await res.json();
-  //   },
-  // },
+  {
+    kind: 'weather',
+    file: 'weather.json',
+    async fetch() {
+      const params = new URLSearchParams({
+        latitude: '33.6189',
+        longitude: '-117.9298',
+        daily: 'weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum',
+        temperature_unit: 'fahrenheit',
+        precipitation_unit: 'inch',
+        timezone: 'America/Los_Angeles',
+        forecast_days: '7',
+      });
+      const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`);
+      if (!res.ok) throw new Error(`open-meteo ${res.status}`);
+      const data = await res.json();
+      return { place: 'Newport Beach, CA', ...data };
+    },
+  },
 ];
 
 async function run() {
