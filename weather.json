@@ -2,7 +2,7 @@
   "place": "Newport Beach, CA",
   "latitude": 33.624027,
   "longitude": -117.91571,
-  "generationtime_ms": 0.2607107162475586,
+  "generationtime_ms": 0.20623207092285156,
   "utc_offset_seconds": -25200,
   "timezone": "America/Los_Angeles",
   "timezone_abbreviation": "GMT-7",
@@ -23,22 +23,22 @@
     "weather_code": [
       3,
       3,
-      51
+      3
     ],
     "temperature_2m_max": [
-      67.7,
+      68.2,
       67.2,
-      67.5
+      67.6
     ],
     "temperature_2m_min": [
       58.7,
       59.4,
-      60.4
+      60.8
     ],
     "precipitation_sum": [
       0,
       0,
-      0.004
+      0
     ]
   }
 }
