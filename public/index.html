@@ -38,6 +38,12 @@
     </button>
   </header>
 
+  <aside class="latest-post-toast" data-latest-post hidden>
+    <span class="latest-post-toast-label">latest post</span>
+    <a class="latest-post-toast-link" data-latest-post-link href="blog/"></a>
+    <button class="latest-post-toast-close" data-latest-post-close aria-label="dismiss">&times;</button>
+  </aside>
+
   <main>
     <section class="intro" id="hi">
       <h1>hi.</h1>
@@ -125,7 +131,7 @@
               <span class="resume-entry-title"><a href="https://github.com/Greg-Chinnici/AutoNews" target="_blank" rel="noopener noreferrer">AutoNews Show</a></span>
               <span class="resume-entry-date">Apr. 2025</span>
             </div>
-            <p class="resume-entry-org">PantherHacks · AI Track Winner · Unity / C# / python</p>
+            <p class="resume-entry-org">PantherHacks · AI Track Winner · Unity / C# / Python</p>
             <ul>
               <li>Built an LLM pipeline that ingests 11 news RSS feeds, summarized by Ollama to create broadcast scripts.</li>
               <li>Used the Google Cloud SDK to batch-synthesize voice clips into an asset folder with script metadata.</li>
@@ -260,5 +266,6 @@
 
   <script src="js/theme.js"></script>
   <script src="js/hydrate.js"></script>
+  <script src="js/latest-post.js"></script>
 </body>
 </html>
