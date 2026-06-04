@@ -103,6 +103,11 @@ async function buildPost(slug) {
   const srcDir = join(CONTENT, slug);
   const md = await readFile(join(srcDir, 'index.md'), 'utf8');
   const { data, content } = matter(md);
+
+  // drafts are skipped entirely: no page is emitted and they're left out of
+  // the index. set `draft: true` in the post's front matter to hold it back.
+  if (data.draft === true) return null;
+
   const html = marked.parse(content);
   const title = data.title || slug;
   const date = formatDate(data.date);
@@ -135,10 +140,15 @@ async function buildIndex(posts) {
 
   const sortControls = posts.length > 1 ? `
       <div class="post-list-controls">
+        <input type="search" class="post-search" data-post-search placeholder="search posts…" aria-label="search posts" autocomplete="off">
         <button data-sort-toggle aria-label="toggle sort order">
           <span data-sort-label>newest first</span>
         </button>
       </div>` : '';
+
+  const emptyState = posts.length > 1
+    ? `\n      <p class="muted post-empty" data-post-empty hidden>no posts match your search.</p>`
+    : '';
 
   const body = `    <section class="intro">
       <h1>blog</h1>
@@ -147,7 +157,7 @@ async function buildIndex(posts) {
     <section>${sortControls}
       <ul class="post-list" data-post-list>
 ${items}
-      </ul>
+      </ul>${emptyState}
     </section>`;
 
   await mkdir(OUT, { recursive: true });
@@ -173,7 +183,12 @@ async function main() {
   const slugs = await listPostDirs();
   const posts = [];
   for (const slug of slugs) {
-    posts.push(await buildPost(slug));
+    const post = await buildPost(slug);
+    if (!post) {
+      console.log(`skipped ${relative(ROOT, join(CONTENT, slug, 'index.md'))} (draft)`);
+      continue;
+    }
+    posts.push(post);
     console.log(`built ${relative(ROOT, join(OUT, slug, 'index.html'))}`);
   }
   await buildIndex(posts);
