@@ -1,9 +1,4 @@
 {
-  "updated": "2026-06-04T23:57:27.267Z",
-  "sources": [
-    {
-      "kind": "weather",
-      "file": "weather.json"
-    }
-  ]
+  "updated": "2026-06-05T01:50:13.999Z",
+  "sources": []
 }
