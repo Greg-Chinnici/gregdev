@@ -10,25 +10,9 @@
 import { writeFile } from 'node:fs/promises';
 
 const SOURCES = [
-  {
-    kind: 'weather',
-    file: 'weather.json',
-    async fetch() {
-      const params = new URLSearchParams({
-        latitude: '33.6189',
-        longitude: '-117.9298',
-        daily: 'weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum',
-        temperature_unit: 'fahrenheit',
-        precipitation_unit: 'inch',
-        timezone: 'America/Los_Angeles',
-        forecast_days: '3',
-      });
-      const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`);
-      if (!res.ok) throw new Error(`open-meteo ${res.status}`);
-      const data = await res.json();
-      return { place: 'Newport Beach, CA', ...data };
-    },
-  },
+  // weather was retired when the homepage activity widget was replaced by the
+  // parallax playground. add new sources here and a matching renderer in
+  // public/js/hydrate.js to bring the activity section back.
 ];
 
 async function run() {

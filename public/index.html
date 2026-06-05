@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/themes.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/resume.css">
-  
+  <link rel="stylesheet" href="css/parallax.css">
 </head>
 <body>
   <header class="site-header">
@@ -256,17 +256,21 @@
       </div>
     </section>
 
-    <section class="hydrated" id="activity" data-source="manifest">
-      <h2>activity</h2>
-      <div data-hydrate-target>
-        <p class="muted">no data sources configured yet.</p>
+    <section id="playground">
+      <h2>playground</h2>
+      <div class="parallax-stage" data-parallax aria-hidden="true">
+        <div class="parallax-bg parallax-bg-far"></div>
+        <div class="parallax-bg parallax-bg-mid"></div>
+        <div class="parallax-line"></div>
+        <div class="parallax-box resting" data-parallax-box data-state="resting"></div>
+        <div class="parallax-fg" data-parallax-fg></div>
       </div>
-      <p class="stamp muted" data-updated></p>
+      <p class="muted">move your cursor across — the box follows.</p>
     </section>
   </main>
 
   <script src="js/theme.js"></script>
-  <script src="js/hydrate.js"></script>
+  <script src="js/parallax.js"></script>
   <script src="js/latest-post.js"></script>
 </body>
 </html>

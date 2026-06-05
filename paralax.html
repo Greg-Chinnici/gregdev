@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Box Follower</title>
+        <style>
+            html,
+            body {
+                margin: 0;
+                height: 100%;
+                background: #1a1a1f;
+                color: #ddd;
+                font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+                overflow: hidden;
+                cursor: crosshair;
+            }
+
+            /* Stage holds the line + box. Centered vertically. */
+            .stage {
+                position: relative;
+                width: 100%;
+                height: 100vh;
+            }
+
+            /* Horizontal line across the middle of the screen */
+            .line {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: #444;
+                z-index: 3;
+            }
+
+            /* ============================================================
+     PARALLAX LAYERS
+     Background layers tile horizontally — swap background-image
+     for your sprite. Foreground layer holds discrete prop elements.
+     ============================================================ */
+
+            /* Tileable background strip. Sits at a fixed Y, repeats on X.
+     Scrolled by updating background-position-x in JS. */
+            .bg-layer {
+                position: absolute;
+                left: 0;
+                width: 100%;
+                background-repeat: repeat-x;
+                pointer-events: none;
+                will-change: background-position;
+                image-rendering: pixelated; /* keep crisp edges for pixel-art sprites */
+            }
+
+            /* Far background — placeholder: mountain silhouette SVG.
+     REPLACE: background-image: url('your-far-sprite.png'); */
+            #bg-far {
+                z-index: 1;
+                height: 180px;
+                top: calc(50% - 180px); /* bottom edge sits on the line */
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='180' viewBox='0 0 400 180' preserveAspectRatio='none'><path d='M0,180 L0,90 L70,40 L140,90 L210,30 L280,80 L350,55 L400,90 L400,180 Z' fill='%232a2a35'/></svg>");
+            }
+
+            /* Mid background — placeholder: building silhouettes SVG.
+     REPLACE: background-image: url('your-mid-sprite.png'); */
+            #bg-mid {
+                z-index: 2;
+                height: 120px;
+                top: calc(50% - 120px);
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='120' viewBox='0 0 300 120'><rect x='20' y='40' width='40' height='80' fill='%23394a6b'/><rect x='80' y='60' width='30' height='60' fill='%23394a6b'/><rect x='130' y='30' width='50' height='90' fill='%23394a6b'/><rect x='200' y='55' width='35' height='65' fill='%23394a6b'/><rect x='255' y='45' width='30' height='75' fill='%23394a6b'/></svg>");
+            }
+
+            /* Foreground container — translated as a single group for parallax. */
+            .fg-layer {
+                position: absolute;
+                inset: 0;
+                z-index: 5; /* in front of the player box (z:4) */
+                pointer-events: none;
+                will-change: transform;
+            }
+
+            /* A single foreground prop. Placeholder: solid colored box.
+     REPLACE: background: url('prop-sprite.png') no-repeat;
+     Use data-prop attribute to target specific props per sprite. */
+            .prop {
+                position: absolute;
+                transform: translate(-50%, -50%);
+                background: #ff6b9d;
+                border: 2px solid #ffffff33;
+                border-radius: 4px;
+            }
+
+            /* The box. We translate it on X to move it. */
+            .box {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                width: 70px;
+                height: 70px;
+                /* --facing is set from JS: 1 = facing right, -1 = facing left.
+       We center the box with translate(-50%, -50%), then scaleX flips it. */
+                --facing: 1;
+                transform: translate(-50%, -50%) scaleX(var(--facing));
+                z-index: 4;
+                background: #4a9eff;
+                border: 2px solid #fff;
+                border-radius: 6px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 11px;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: #fff;
+                /* Smooth color change between states (position is JS-driven, no transition on transform) */
+                transition: background 0.2s ease;
+                user-select: none;
+            }
+
+            /* Counter-flip the label so it stays readable when the box mirrors.
+     A spritesheet replacement won't need this — sprites WANT to flip. */
+            .box::before {
+                content: attr(data-state);
+                transform: scaleX(var(--facing));
+            }
+
+            /* Color per state — easy to tweak */
+            .box.moving {
+                background: #ff8c42;
+            }
+            .box.resting {
+                background: #4a9eff;
+            }
+            .box.idle {
+                background: #6b6b75;
+            }
+
+            /* Small HUD for debugging */
+            .hud {
+                position: fixed;
+                top: 12px;
+                left: 12px;
+                font-size: 12px;
+                line-height: 1.5;
+                opacity: 0.6;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="stage">
+            <div id="bg-far" class="bg-layer"></div>
+            <div id="bg-mid" class="bg-layer"></div>
+            <div class="line"></div>
+            <div id="box" class="box resting" data-state="resting"></div>
+            <div id="fg-layer" class="fg-layer"></div>
+        </div>
+
+        <div class="hud">
+            move your mouse horizontally<br />
+            state shown on the box
+        </div>
+
+        <script>
+            // ---- Config ----
+            const LERP_FACTOR = 0.12; // how fast the box chases the mouse (0..1). Higher = snappier.
+            const MOVE_THRESHOLD = 0.5; // px distance to target above which we consider the box "moving"
+            const IDLE_DELAY_MS = 1500; // mouse inactivity before we switch from resting -> idle
+
+            // Parallax: each layer shifts by (cameraOffset * factor).
+            // <1 = behind/slower (depth), >1 = in front/faster (close to camera).
+
+            // Background layers tile horizontally — scrolled by background-position-x.
+            const BG_LAYERS = [
+                { el: document.getElementById("bg-far"), factor: 0.2 },
+                { el: document.getElementById("bg-mid"), factor: 0.5 },
+            ];
+
+            // Foreground layer: discrete prop elements, parallaxed as one group.
+            const FG_LAYER = document.getElementById("fg-layer");
+            const FG_FACTOR = 1.4;
+            const FG_PROPS = {
+                count: 5,
+                sizeRange: [40, 90], // px
+                yRange: [30, 140], // offset below the line
+            };
+
+            // ---- State ----
+            const box = document.getElementById("box");
+
+            // Start the box centered, with the target at the same place,
+            // so it doesn't snap on load before the mouse has moved.
+            let targetX = window.innerWidth / 2;
+            let currentX = targetX;
+
+            let lastMouseMoveAt = performance.now();
+            let state = "resting"; // 'moving' | 'resting' | 'idle'
+            let facing = 1; // 1 = right, -1 = left. Sticky when not moving.
+
+            // ---- Input ----
+            // Track only X — the box lives on a horizontal line.
+            window.addEventListener("mousemove", (e) => {
+                targetX = e.clientX;
+                lastMouseMoveAt = performance.now();
+            });
+
+            // Keep the box on-screen if the window resizes
+            window.addEventListener("resize", () => {
+                targetX = Math.min(targetX, window.innerWidth);
+                currentX = Math.min(currentX, window.innerWidth);
+            });
+
+            // ---- State machine ----
+            // Single source of truth: distance to target + time since last mouse move.
+            // - far from target           -> moving
+            // - close to target, recent   -> resting
+            // - close to target, stale    -> idle
+            function updateState(distance, now) {
+                const timeSinceMouse = now - lastMouseMoveAt;
+                let next;
+
+                if (distance > MOVE_THRESHOLD) {
+                    next = "moving";
+                } else if (timeSinceMouse > IDLE_DELAY_MS) {
+                    next = "idle";
+                } else {
+                    next = "resting";
+                }
+
+                if (next !== state) {
+                    box.classList.remove(state);
+                    box.classList.add(next);
+                    box.dataset.state = next; // ::before reads this
+                    state = next;
+                }
+            }
+
+            // ---- Foreground props setup ----
+            // Spread props across a virtual world wider than the viewport so there's
+            // always something to scroll into. Each prop gets a data-prop index so
+            // you can target individual ones for unique sprites later.
+            const WORLD_WIDTH = window.innerWidth * 3;
+            const WORLD_LEFT = -window.innerWidth;
+
+            const rand = (min, max) => min + Math.random() * (max - min);
+
+            function buildProps() {
+                const { count, sizeRange, yRange } = FG_PROPS;
+                for (let i = 0; i < count; i++) {
+                    const p = document.createElement("div");
+                    p.className = "prop";
+                    p.dataset.prop = i; // hook for per-prop sprite styling later
+
+                    const size = rand(sizeRange[0], sizeRange[1]);
+                    const x =
+                        WORLD_LEFT +
+                        (i + Math.random()) * (WORLD_WIDTH / count);
+                    const y = rand(yRange[0], yRange[1]);
+
+                    p.style.width = size + "px";
+                    p.style.height = size + "px";
+                    p.style.left = x + "px";
+                    p.style.top = `calc(50% + ${y}px)`;
+                    FG_LAYER.appendChild(p);
+                }
+            }
+            buildProps();
+
+            // ---- Animation loop ----
+            function tick(now) {
+                // Linear interpolation toward the target.
+                // currentX moves a fraction of the remaining distance every frame -> ease-out feel.
+                currentX += (targetX - currentX) * LERP_FACTOR;
+
+                const delta = targetX - currentX;
+                const distance = Math.abs(delta);
+
+                // Only update facing while clearly moving — otherwise sub-pixel jitter
+                // near the target would cause the sprite to flicker left/right.
+                if (distance > MOVE_THRESHOLD) {
+                    facing = delta > 0 ? 1 : -1;
+                }
+
+                updateState(distance, now);
+
+                // Apply position + facing. translate(-50%, -50%) keeps the box centered
+                // on (x, line); scaleX(facing) mirrors it horizontally.
+                box.style.left = currentX + "px";
+                box.style.setProperty("--facing", facing);
+
+                // Parallax: shift each layer based on how far the (smoothed) player is
+                // from screen center. Using currentX (not targetX) so parallax inherits
+                // the same lerp easing as the player — no separate smoothing needed.
+                const cameraOffset = currentX - window.innerWidth / 2;
+
+                // Backgrounds tile, so we scroll the background-position rather than
+                // translating the element. This gives infinite repeat for free.
+                for (const layer of BG_LAYERS) {
+                    layer.el.style.backgroundPositionX =
+                        -cameraOffset * layer.factor + "px";
+                }
+
+                // Foreground is a group of discrete props — translate the container.
+                FG_LAYER.style.transform = `translateX(${-cameraOffset * FG_FACTOR}px)`;
+
+                requestAnimationFrame(tick);
+            }
+
+            requestAnimationFrame(tick);
+        </script>
+    </body>
+</html>
