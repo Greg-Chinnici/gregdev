@@ -153,6 +153,9 @@ h2 { font-size: 1.25rem; margin: 0 0 1rem; }
 }
 [data-sort-toggle]:hover { border-color: var(--accent); }
 
+/* Blog posts get a wider column than the default 720px reading width. */
+main:has(.post) { max-width: 880px; }
+
 .post-header { margin-bottom: 2rem; }
 .post-header h1 { margin-bottom: 0.25rem; }
 .post-header .stamp { margin-top: 0; }
@@ -200,6 +203,55 @@ h2 { font-size: 1.25rem; margin: 0 0 1rem; }
   font-size: 1em;
   color: inherit;
 }
+
+/* syntax highlighting: highlight.js token classes mapped to per-theme vars
+   (see --hl-* in css/themes.css). build.js bakes the .hljs-* spans in. */
+.hljs-comment,
+.hljs-quote { color: var(--hl-comment); font-style: italic; }
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-section,
+.hljs-doctag { color: var(--hl-keyword); }
+
+.hljs-built_in,
+.hljs-symbol,
+.hljs-bullet { color: var(--hl-builtin); }
+
+.hljs-type,
+.hljs-class .hljs-title,
+.hljs-title.class_ { color: var(--hl-type); }
+
+.hljs-title,
+.hljs-title.function_,
+.hljs-function .hljs-title { color: var(--hl-function); }
+
+.hljs-string,
+.hljs-regexp,
+.hljs-char.escape_,
+.hljs-meta .hljs-string { color: var(--hl-string); }
+
+.hljs-number,
+.hljs-addition,
+.hljs-deletion { color: var(--hl-number); }
+
+.hljs-attr,
+.hljs-attribute,
+.hljs-property,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class { color: var(--hl-attr); }
+
+.hljs-meta,
+.hljs-operator,
+.hljs-punctuation,
+.hljs-params { color: var(--hl-meta); }
+
+.hljs-emphasis { font-style: italic; }
+.hljs-strong { font-weight: 700; }
 
 .post hr {
   border: 0;

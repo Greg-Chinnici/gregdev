@@ -9,6 +9,18 @@ import { join, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import { marked } from 'marked';
+import { markedHighlight } from 'marked-highlight';
+import hljs from 'highlight.js';
+
+// highlight fenced code blocks at build time. token spans (.hljs-*) are baked
+// into the HTML; colors are themed via CSS vars in css/base.css + css/themes.css.
+marked.use(markedHighlight({
+  langPrefix: 'language-',
+  highlight(code, lang) {
+    const language = lang && hljs.getLanguage(lang) ? lang : 'plaintext';
+    return hljs.highlight(code, { language }).value;
+  },
+}));
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const CONTENT = join(ROOT, 'content', 'blog');
@@ -19,6 +31,10 @@ const themeBootScript = `(function () {
       if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       document.documentElement.dataset.theme = t;
     })();`;
+
+// inline data-URI favicon: ">gc"-style mark, ">"-less "gc" in rgb(56,100,187).
+// self-contained so it works at any directory depth without a relative path.
+const favicon = `<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext x='2' y='47' font-family='ui-monospace,SFMono-Regular,Menlo,monospace' font-size='42' font-weight='700' fill='%233864bb'%3Egc%3C/text%3E%3C/svg%3E">`;
 
 // `prefix` is the relative path from the page back to public/ root.
 // '' for root pages, '../' for /blog/index.html, '../../' for /blog/<slug>/index.html.
@@ -34,6 +50,7 @@ function shell({ title, body, currentBlog = false, prefix, extraScripts = [] }) 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${title}</title>
+  ${favicon}
   <script>
     ${themeBootScript}
   </script>
