@@ -116,14 +116,14 @@ async function copyAssets(srcDir, dstDir) {
   }
 }
 
-async function buildPost(slug) {
+async function buildPost(slug, { includeDrafts = false } = {}) {
   const srcDir = join(CONTENT, slug);
   const md = await readFile(join(srcDir, 'index.md'), 'utf8');
   const { data, content } = matter(md);
 
   // drafts are skipped entirely: no page is emitted and they're left out of
   // the index. set `draft: true` in the post's front matter to hold it back.
-  if (data.draft === true) return null;
+  if (data.draft === true && !includeDrafts) return null;
 
   const html = marked.parse(content);
   const title = data.title || slug;
@@ -192,6 +192,9 @@ async function exists(p) {
 }
 
 async function main() {
+  const includeDrafts = process.argv.includes('--drafts');
+  if (includeDrafts) console.log('including drafts');
+
   if (await exists(OUT)) {
     await rm(OUT, { recursive: true, force: true });
   }
@@ -200,7 +203,7 @@ async function main() {
   const slugs = await listPostDirs();
   const posts = [];
   for (const slug of slugs) {
-    const post = await buildPost(slug);
+    const post = await buildPost(slug, { includeDrafts });
     if (!post) {
       console.log(`skipped ${relative(ROOT, join(CONTENT, slug, 'index.md'))} (draft)`);
       continue;
