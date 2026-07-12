@@ -153,6 +153,114 @@ h2 { font-size: 1.25rem; margin: 0 0 1rem; }
 }
 [data-sort-toggle]:hover { border-color: var(--accent); }
 
+/* Game portfolio grid — bigger cover previews and metadata than the blog list.
+   The index gets a wider column so cards can sit two/three across. */
+main:has(.game-grid) { max-width: 960px; }
+
+.game-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.game-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.game-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.game-card-cover {
+  display: block;
+  aspect-ratio: 16 / 9;
+  background: var(--code-bg);
+  overflow: hidden;
+}
+.game-card-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.2s ease;
+}
+.game-card:hover .game-card-cover img { transform: scale(1.03); }
+.game-card-cover.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  text-decoration: none;
+}
+.game-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 1.1rem 1.2rem;
+  flex: 1;
+}
+.game-card-title { font-size: 1.15rem; margin: 0; }
+.game-card-title a { color: var(--fg); }
+.game-card-title a:hover { color: var(--accent); text-decoration: none; }
+.game-card-body .stamp { margin-top: 0; }
+.game-card-summary { font-size: 0.9em; margin: 0; flex: 1; }
+.game-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin: 0;
+  margin-top: auto;
+  padding-top: 0.25rem;
+  font-size: 0.85em;
+}
+
+/* metadata chips — shared by the cards (.game-meta) and writeups (.post-meta) */
+.game-meta,
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.post-meta { margin-top: 0.75rem; }
+.game-meta li,
+.post-meta li {
+  font-size: 0.75em;
+  padding: 0.15rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--fg-muted);
+}
+.post-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0.75rem 0 0;
+  font-size: 0.9em;
+}
+
+/* inline trailer/demo player — 16:9, fills the reading column */
+.video-embed {
+  aspect-ratio: 16 / 9;
+  margin: 0 0 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--code-bg);
+}
+.video-embed iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+}
+
 /* Blog posts get a wider column than the default 720px reading width. */
 main:has(.post) { max-width: 880px; }
 
