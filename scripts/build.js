@@ -29,6 +29,9 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const CONTENT = join(ROOT, 'content');
 const PUBLIC = join(ROOT, 'public');
 
+// canonical/OG absolute base — GitHub Pages project URL.
+const SITE_URL = 'https://greg-chinnici.github.io/gregdev/';
+
 const themeBootScript = `(function () {
       var t = localStorage.getItem('theme');
       if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -45,24 +48,46 @@ const NAV = [{ slug: 'blog', label: 'blog' }, { slug: 'games', label: 'games' }]
 // `prefix` is the relative path from the page back to public/ root.
 // '' for root pages, '../' for /<section>/index.html, '../../' for /<section>/<slug>/index.html.
 // using relative paths keeps the site working under any base (user-page or project-page).
-function shell({ title, body, current = null, prefix, extraScripts = [] }) {
+// `path` is the page's location under SITE_URL, used for canonical + og:url (e.g. '', 'blog/', 'blog/slug/').
+function shell({ title, body, current = null, prefix, path = '', description = '', ogType = 'website', ogImage = '', extraScripts = [], extraStyles = [] }) {
   const nav = NAV.map(({ slug, label }) => current === slug
     ? `<a href="${prefix}${slug}/" aria-current="page">${label}</a>`
     : `<a href="${prefix}${slug}/">${label}</a>`).join('\n      ');
+  const styles = extraStyles.map(s => `  <link rel="stylesheet" href="${prefix}css/${s}">`).join('\n');
   const scripts = extraScripts.map(s => `  <script src="${prefix}js/${s}"></script>`).join('\n');
+
+  const canonical = `${SITE_URL}${path}`;
+  const desc = description ? esc(description) : '';
+  const twitterCard = ogImage ? 'summary_large_image' : 'summary';
+  const seo = [
+    desc && `  <meta name="description" content="${desc}">`,
+    `  <link rel="canonical" href="${canonical}">`,
+    `  <meta property="og:type" content="${ogType}">`,
+    `  <meta property="og:title" content="${esc(title)}">`,
+    desc && `  <meta property="og:description" content="${desc}">`,
+    `  <meta property="og:url" content="${canonical}">`,
+    `  <meta property="og:site_name" content="greg chinnici">`,
+    ogImage && `  <meta property="og:image" content="${esc(ogImage)}">`,
+    `  <meta name="twitter:card" content="${twitterCard}">`,
+    `  <meta name="twitter:title" content="${esc(title)}">`,
+    desc && `  <meta name="twitter:description" content="${desc}">`,
+    ogImage && `  <meta name="twitter:image" content="${esc(ogImage)}">`,
+  ].filter(Boolean).join('\n');
+
   return `<!doctype html>
 <html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${title}</title>
+${seo}
   ${favicon}
   <script>
     ${themeBootScript}
   </script>
   <link rel="stylesheet" href="${prefix}css/themes.css">
   <link rel="stylesheet" href="${prefix}css/base.css">
-</head>
+${styles ? styles + '\n' : ''}</head>
 <body>
   <header class="site-header">
     <a class="brand" href="${prefix || './'}">greg chinnici</a>
@@ -206,7 +231,28 @@ ${embed}${html}
 
   const dstDir = join(PUBLIC, section.slug, slug);
   await mkdir(dstDir, { recursive: true });
-  await writeFile(join(dstDir, 'index.html'), shell({ title: `${title} · greg chinnici`, body, current: section.slug, prefix: '../../' }));
+
+  // absolute og:image — pass a full URL through verbatim; otherwise resolve
+  // the sibling asset filename against SITE_URL. games fall back to the
+  // video thumbnail so link previews still have something to show.
+  let ogImage = '';
+  if (section.slug === 'games') {
+    const cover = data.cover
+      ? (/^https?:\/\//.test(data.cover) ? data.cover : `${SITE_URL}${section.slug}/${slug}/${data.cover}`)
+      : videoThumb(data.video);
+    ogImage = cover || '';
+  }
+
+  await writeFile(join(dstDir, 'index.html'), shell({
+    title: `${title} · greg chinnici`,
+    body,
+    current: section.slug,
+    prefix: '../../',
+    path: `${section.slug}/${slug}/`,
+    description: data.summary || '',
+    ogType: 'article',
+    ogImage,
+  }));
   await copyAssets(srcDir, dstDir);
 
   return { slug, title, date, summary: data.summary || '', data };
@@ -250,6 +296,8 @@ ${items}
     body,
     current: 'blog',
     prefix: '../',
+    path: 'blog/',
+    description: 'Writeups by Greg Chinnici on game dev, matchmaking systems, embedded hacking, and other side projects.',
     extraScripts: posts.length > 1 ? ['blog.js'] : [],
   }));
 }
@@ -317,6 +365,8 @@ ${cards}
     body,
     current: 'games',
     prefix: '../',
+    path: 'games/',
+    description: 'Game dev projects by Greg Chinnici — showcases, breakdowns, and prototypes across Unity, C#, and Python.',
     extraScripts: games.length > 1 ? ['games.js'] : [],
   }));
 }
@@ -355,6 +405,28 @@ async function buildSection(section, { includeDrafts }) {
   console.log(`built ${relative(ROOT, join(outDir, 'index.html'))} (${built.length} ${section.slug})`);
 }
 
+// wraps the hand-written body at content/index.html in the shared shell,
+// so the header/nav lives in exactly one place (shell()) rather than being
+// duplicated per page.
+async function buildHome() {
+  const src = join(CONTENT, 'index.html');
+  if (!(await exists(src))) {
+    console.log('no content/index.html — skipping home');
+    return;
+  }
+  const body = await readFile(src, 'utf8');
+  await writeFile(join(PUBLIC, 'index.html'), shell({
+    title: 'greg chinnici',
+    body,
+    prefix: '',
+    path: '',
+    description: 'Greg Chinnici — software engineer in Orange County, CA. Backend, game dev, and technical design.',
+    extraStyles: ['resume.css', 'parallax.css'],
+    extraScripts: ['parallax.js', 'latest-post.js'],
+  }));
+  console.log(`built ${relative(ROOT, join(PUBLIC, 'index.html'))}`);
+}
+
 async function main() {
   const includeDrafts = process.argv.includes('--drafts');
   if (includeDrafts) console.log('including drafts');
@@ -367,6 +439,8 @@ async function main() {
   for (const section of sections) {
     await buildSection(section, { includeDrafts });
   }
+
+  await buildHome();
 }
 
 main().catch(err => {
