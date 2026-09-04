@@ -30,26 +30,67 @@
 
       <div class="resume-grid">
         <span class="resume-label">experience</span>
+
         <div class="resume-body">
           <div class="resume-entry">
             <div class="resume-entry-header">
               <span class="resume-entry-title">Software Engineer</span>
-              <span class="resume-entry-date">June 2025 — present</span>
+              <span class="resume-entry-date">June 2025 — Present</span>
             </div>
+
             <p class="resume-entry-org">90Meter</p>
+
             <ul>
               <li>
-                Engineered a deterministic, replayable, server-authoritative naval simulation in C#,
-                with hierarchical A* global pathfinding, using a headless Unity backend and a
-                React/TypeScript DeckGL frontend with custom shaders.
+                <strong>Built a deterministic, server-authoritative naval simulation</strong>
+                in C# with a headless Unity backend and React/TypeScript deck.gl frontend.
+                <ul>
+                  <li>
+                    Implemented hierarchical A* pathfinding across a spherical world,
+                    terrain-constrained movement, and a deterministic tick-based simulation.
+                  </li>
+                  <li>
+                    Developed multi-tier signal denial and priority-based connectivity
+                    across six simulated transport bearers, with deterministic multi-zone
+                    conflict resolution and degraded communications.
+                  </li>
+                  <li>
+                    Built a data-driven scenario authoring system for scripted unit
+                    placement and staged failure conditions.
+                  </li>
+                  <li>
+                    Implemented patch-based state mutation and concurrency testing,
+                    eliminating last-write-wins race conditions during concurrent client edits.
+                  </li>
+                  <li>
+                    Developed custom deck.gl rendering layers for dynamic clustering,
+                    atmospheric effects, and ocean-depth visualization over MapLibre.
+                  </li>
+                </ul>
               </li>
+
               <li>
-                Built and owned a C# tool for migrating certificates between CA providers for FBI users.
+                <strong>Architected a Go-based PKI orchestration platform</strong> for
+                automated deployment, provisioning, and lifecycle management of
+                Dockerized Certificate Authorities including EJBCA, Dogtag, and step-ca.
+                <ul>
+                  <li>
+                    Designed a plugin-based architecture supporting multiple PKI engines
+                    through a common interface.
+                  </li>
+                  <li>
+                    Modeled CA containers as managed state machines for reliable,
+                    repeatable provisioning and lifecycle operations.
+                  </li>
+                  <li>
+                    Added post-quantum cryptography (PQC) support to the orchestration workflow.
+                  </li>
+                </ul>
               </li>
+
               <li>
-                Designed and implemented a Go-based PKI orchestration framework that automates
-                deployment, provisioning, and hierarchy creation for Dockerized Certificate Authorities
-                (EJBCA, Dogtag, step-ca) with PQC support.
+                <strong>Built and owned a C# certificate migration tool</strong> enabling
+                FBI users to migrate certificates between Certificate Authority providers.
               </li>
             </ul>
           </div>
@@ -59,10 +100,13 @@
               <span class="resume-entry-title">User Research Participant</span>
               <span class="resume-entry-date">Feb. 2026</span>
             </div>
+
             <p class="resume-entry-org">Activision</p>
+
             <ul>
               <li>
-                Tested Modern Warfare 4 and gave meaningful feedback through surveys and talks with devs.
+                Participated in Modern Warfare 4 user research, providing structured
+                feedback through surveys and direct discussions with developers.
               </li>
             </ul>
           </div>
@@ -72,10 +116,13 @@
               <span class="resume-entry-title">Closed Alpha Playtester</span>
               <span class="resume-entry-date">Aug. 2021</span>
             </div>
+
             <p class="resume-entry-org">Ubisoft · XDefiant</p>
+
             <ul>
               <li>
-                Tested early gamemodes and maps for XDefiant.
+                Playtested early XDefiant maps and game modes, providing feedback
+                during closed alpha development.
               </li>
             </ul>
           </div>
@@ -84,76 +131,146 @@
         <hr class="resume-rule" />
 
         <span class="resume-label">projects</span>
+
         <div class="resume-body">
           <div class="resume-entry">
             <div class="resume-entry-header">
-              <span class="resume-entry-title"><a href="https://github.com/Greg-Chinnici/go-match-maker" target="_blank" rel="noopener noreferrer">Matchmaking Service</a></span>
+              <span class="resume-entry-title">
+                <a href="https://github.com/Greg-Chinnici/go-match-maker"
+                   target="_blank"
+                   rel="noopener noreferrer">Matchmaking Service</a>
+              </span>
               <span class="resume-entry-date">Feb. 2026</span>
             </div>
+
             <p class="resume-entry-org">Personal Project · Go</p>
+
             <ul>
-              <li>Built an abstract matchmaking service in Go based on the Glicko-2 rating system.</li>
-              <li>Optimized with an in-memory B-tree and a dockerized Postgres DB.</li>
-              <li>Configurable for lobby sizes, team counts, and team-balancing implementations.</li>
+              <li>
+                Built a configurable matchmaking service in Go using the Glicko-2
+                rating system for skill-based player matching.
+              </li>
+              <li>
+                Implemented an in-memory B-tree and Dockerized PostgreSQL persistence
+                layer for efficient matchmaking and durable state.
+              </li>
+              <li>
+                Designed configurable lobby sizes, team counts, and team-balancing
+                strategies.
+              </li>
             </ul>
           </div>
 
           <div class="resume-entry">
             <div class="resume-entry-header">
-              <span class="resume-entry-title"><a href="https://www.youtube.com/watch?v=y9tV5KNPlOQ" target="_blank" rel="noopener noreferrer">GLASS</a></span>
+              <span class="resume-entry-title">
+                <a href="https://www.youtube.com/watch?v=y9tV5KNPlOQ"
+                   target="_blank"
+                   rel="noopener noreferrer">GLASS</a>
+              </span>
               <span class="resume-entry-date">Feb. — May 2025</span>
             </div>
+
             <p class="resume-entry-org">Capstone · Unity / C#</p>
+
             <ul>
-              <li>Developed a 3D first-person shooter in Unity and C#; recognized as a semi-finalist at IEEE GameSig.</li>
-              <li>Designed 5 weapons and 6 levels, contributing to core gameplay mechanics and player experience.</li>
-              <li>Used Mirror to create a fully networked multiplayer game of up to 12 players with region-specific servers.</li>
+              <li>
+                Developed a networked 3D first-person shooter in Unity and C#,
+                recognized as an IEEE GameSig semi-finalist.
+              </li>
+              <li>
+                Designed five weapons and six levels while contributing to core
+                gameplay systems and player experience.
+              </li>
+              <li>
+                Built multiplayer networking with Mirror, supporting up to 12 players
+                across region-specific servers.
+              </li>
             </ul>
           </div>
 
           <div class="resume-entry">
             <div class="resume-entry-header">
-              <span class="resume-entry-title"><a href="https://github.com/Greg-Chinnici/AutoNews" target="_blank" rel="noopener noreferrer">AutoNews Show</a></span>
+              <span class="resume-entry-title">
+                <a href="https://github.com/Greg-Chinnici/AutoNews"
+                   target="_blank"
+                   rel="noopener noreferrer">AutoNews Show</a>
+              </span>
               <span class="resume-entry-date">Apr. 2025</span>
             </div>
+
             <p class="resume-entry-org">PantherHacks · AI Track Winner · Unity / C# / Python</p>
+
             <ul>
-              <li>Built an LLM pipeline that ingests 11 news RSS feeds, summarized by Ollama to create broadcast scripts.</li>
-              <li>Used the Google Cloud SDK to batch-synthesize voice clips into an asset folder with script metadata.</li>
-              <li>Created an interactive Unity broadcast show with 2–4 procedurally animated characters.</li>
+              <li>
+                Built an LLM-powered pipeline that ingests 11 news RSS feeds and
+                generates broadcast scripts using Ollama.
+              </li>
+              <li>
+                Automated voice generation with the Google Cloud SDK, producing
+                synchronized audio assets and script metadata.
+              </li>
+              <li>
+                Created an interactive Unity broadcast with 2–4 procedurally
+                animated characters.
+              </li>
             </ul>
           </div>
 
           <div class="resume-entry">
             <div class="resume-entry-header">
-              <span class="resume-entry-title"><a href="https://www.youtube.com/watch?v=uV4CMijPF9g" target="_blank" rel="noopener noreferrer">Captain Coral's Fintastic Spelling Adventure</a></span>
+              <span class="resume-entry-title">
+                <a href="https://www.youtube.com/watch?v=uV4CMijPF9g"
+                   target="_blank"
+                   rel="noopener noreferrer">Captain Coral's Fintastic Spelling Adventure</a>
+              </span>
               <span class="resume-entry-date">Feb. — Apr. 2024</span>
             </div>
+
             <p class="resume-entry-org">Class Project · Unity / C#</p>
+
             <ul>
-              <li>Developed a cross-platform educational kids' game in Unity and C# with the Universal Render Pipeline.</li>
-              <li>Built a web scraper to analyze and verify the difficulty of over 300,000 words.</li>
-              <li>Implemented a scalable ScriptableObject architecture to manage data for 50+ fish objects.</li>
+              <li>
+                Developed a cross-platform educational game in Unity and C# using
+                the Universal Render Pipeline.
+              </li>
+              <li>
+                Built a web scraper to analyze and validate the difficulty of
+                300,000+ words.
+              </li>
+              <li>
+                Designed a scalable ScriptableObject architecture supporting data
+                for 50+ fish objects.
+              </li>
             </ul>
           </div>
 
           <div class="resume-entry">
             <div class="resume-entry-header">
               <span class="resume-entry-title">Game Design Documents</span>
-              <span class="resume-entry-date">Aug. 2023 — present</span>
+              <span class="resume-entry-date">Aug. 2023 — Present</span>
             </div>
+
             <ul>
               <li>
-                <a href="https://docs.google.com/document/d/1cgnQ6Be8NGl03rhQidsPpjYPp5N_3jPPY4WobdGXgo4/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><em>Call of Duty Concepts</em></a>
-                — systems and equipment ideas drawn from years of experience.
+                <a href="https://docs.google.com/document/d/1cgnQ6Be8NGl03rhQidsPpjYPp5N_3jPPY4WobdGXgo4/edit?usp=sharing"
+                   target="_blank"
+                   rel="noopener noreferrer"><em>Call of Duty Concepts</em></a>
+                — multiplayer systems and equipment concepts informed by years of
+                competitive play.
               </li>
               <li>
-                <a href="https://miro.com/app/board/uXjVG11WyJg=/?share_link_id=407895382968" target="_blank" rel="noopener noreferrer"><em>Danny's Inferno</em></a>
-                — single-player FPS; a kid dreams of becoming a firefighter.
+                <a href="https://miro.com/app/board/uXjVG11WyJg=/?share_link_id=407895382968"
+                   target="_blank"
+                   rel="noopener noreferrer"><em>Danny's Inferno</em></a>
+                — single-player FPS design centered on a child aspiring to become
+                a firefighter.
               </li>
               <li>
-                <a href="https://docs.google.com/document/d/1PDlFWy7ojTU4aM6Zur-w6ycW-zSNmHzy/edit?usp=sharing&ouid=100928052231964457519&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer"><em>Spy Guy</em></a>
-                — third-person dystopian magic story game.
+                <a href="https://docs.google.com/document/d/1PDlFWy7ojTU4aM6Zur-w6ycW-zSNmHzy/edit?usp=sharing&ouid=100928052231964457519&rtpof=true&sd=true"
+                   target="_blank"
+                   rel="noopener noreferrer"><em>Spy Guy</em></a>
+                — third-person dystopian action game with magic-based systems.
               </li>
             </ul>
           </div>
@@ -162,15 +279,22 @@
         <hr class="resume-rule" />
 
         <span class="resume-label">education</span>
+
         <div class="resume-body">
           <div class="resume-entry">
             <div class="resume-entry-header">
               <span class="resume-entry-title">B.S. Computer Science</span>
               <span class="resume-entry-date">May 2025</span>
             </div>
-            <p class="resume-entry-org">Chapman University · Minor in Game Development Programming</p>
+
+            <p class="resume-entry-org">
+              Chapman University · Minor in Game Development Programming
+            </p>
+
             <ul>
-              <li>Dean's List: Fall 2022, Spring 2023, Fall 2023, Spring 2024.</li>
+              <li>
+                Dean's List: Fall 2022, Spring 2023, Fall 2023, Spring 2024.
+              </li>
             </ul>
           </div>
         </div>
@@ -178,26 +302,33 @@
         <hr class="resume-rule" />
 
         <span class="resume-label">skills</span>
+
         <div class="resume-body">
           <div class="resume-skills">
             <div>
               <p class="resume-skill-group-name">Languages</p>
               <p class="resume-skill-list">
-                C# · Python · C++<br />Java · Go · SQL · OpenGL<br />Bash
+                C# · Python · C++<br>
+                Java · Go · SQL · OpenGL<br>
+                Bash
               </p>
             </div>
 
             <div>
               <p class="resume-skill-group-name">Software</p>
               <p class="resume-skill-list">
-                DotPeek · Rider · DataGrip<br />GitHub · Photoshop · Plastic SCM<br />Azure · NixOS · RHEL8<br />Docker · Google Cloud · xUnit
+                Rider · DataGrip · DotPeek<br>
+                GitHub · Photoshop · Plastic SCM<br>
+                Azure · NixOS · RHEL8<br>
+                Docker · Google Cloud · xUnit
               </p>
             </div>
 
             <div>
               <p class="resume-skill-group-name">Engines / Tools</p>
               <p class="resume-skill-list">
-                Unity · Unreal · Confluence<br />Jira · Black Ops 3 Mod Tools <br />
+                Unity · Unreal · Confluence<br>
+                Jira · Black Ops 3 Mod Tools<br>
                 Radiant
               </p>
             </div>
@@ -207,6 +338,7 @@
         <hr class="resume-rule" />
 
         <span class="resume-label">awards</span>
+
         <div class="resume-body">
           <div class="resume-entry">
             <div class="resume-entry-header">
@@ -224,14 +356,18 @@
 
           <div class="resume-entry">
             <div class="resume-entry-header">
-              <span class="resume-entry-title">DEFCON 32 Black Badge — Octopus Game Winner</span>
+              <span class="resume-entry-title">
+                DEFCON 32 Black Badge — Octopus Game Winner
+              </span>
               <span class="resume-entry-date">August 2024</span>
             </div>
           </div>
 
           <div class="resume-entry">
             <div class="resume-entry-header">
-              <span class="resume-entry-title">Call of Duty — Iridescent / Top 250 (5 seasons)</span>
+              <span class="resume-entry-title">
+                Call of Duty — Iridescent / Top 250 (5 seasons)
+              </span>
               <span class="resume-entry-date">2016 — 2025</span>
             </div>
             <p class="resume-entry-org">7 Gamebattles Gold · 20 Gamebattles Silver</p>
@@ -239,7 +375,9 @@
 
           <div class="resume-entry">
             <div class="resume-entry-header">
-              <span class="resume-entry-title">Halo Infinite — Onyx Rank (10 operations)</span>
+              <span class="resume-entry-title">
+                Halo Infinite — Onyx Rank (10 operations)
+              </span>
               <span class="resume-entry-date">2022 — 2024</span>
             </div>
           </div>
