@@ -110,4 +110,4 @@ The one snag was Metal shader compilation. The default path shells out to `xcrun
 
 The rule stack is what I actually use. Watching a pattern evolve under B3/S23 for a hundred generations and then hit three generations of B2/S is more interesting than any single rule. I want to push the pipeline idea further — rule blending, per-region rules, maybe scripted transitions between segments.
 
-For now it's a toy.
+For now it's a toy, but the code for it is here: [GitHub](https://github.com/Greg-Chinnici/automata).
