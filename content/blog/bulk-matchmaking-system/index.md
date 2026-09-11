@@ -1,7 +1,7 @@
 ---
 title: "Building a Bulk Matchmaking System in Go"
 date: 2026-04-04
-summary: "A Glicko-2 matchmaking server in Go — skill-sorted queues, pluggable team-balancing strategies, and a worker pool that can chew through thousands of players at once."
+summary: "A Glicko-2 matchmaking server in Go: skill-sorted queues, pluggable team-balancing strategies, and a worker pool that can chew through thousands of players at once."
 draft: false
 ---
 

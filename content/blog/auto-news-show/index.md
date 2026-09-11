@@ -5,7 +5,7 @@ summary: "A PantherHacks 2025 project that scrapes RSS feeds, clusters them into
 draft: false
 ---
 
-[AutoNews](https://github.com/Greg-Chinnici/AutoNews) was our submission for Chapman University's PantherHacks 2025 — built with [Spencer Au](https://github.com/SpencerAu). The pitch was simple: take the firehose of real-world news and turn it, automatically, into a watchable TV broadcast with two anchors trading lines back and forth.
+[AutoNews](https://github.com/Greg-Chinnici/AutoNews) was our submission for Chapman University's PantherHacks 2025; built with [Spencer Au](https://github.com/SpencerAu). The pitch was simple: take the firehose of real-world news and turn it, automatically, into a watchable TV broadcast with two anchors trading lines back and forth.
 
 The hard part is that "watchable broadcast" hides an entire pipeline. You have to decide _what_ the news is, gather it, write it into a script that sounds like people talking, give those people voices, and then actually stage the show. Here's how each piece works.
 
@@ -15,7 +15,7 @@ Everything starts with a list of RSS feeds — AP, the Guardian, NBC, CBS, ABC, 
 
 The interesting move is what we store alongside each headline. Every title gets run through two things:
 
-- **spaCy** for named-entity extraction — pulling out the people, orgs, and places a story is actually about.
+- **spaCy** for named-entity extraction: pulling out the people, orgs, and places a story is actually about.
 - **A sentence-transformer** (`all-MiniLM-L6-v2`) to turn the title into an embedding — a vector that captures its _meaning_, not just its words.
 
 ```python
