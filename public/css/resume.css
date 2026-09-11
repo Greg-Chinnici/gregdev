@@ -6,8 +6,8 @@
 
     .resume-grid {
       display: grid;
-      grid-template-columns: 11rem 1fr;
-      gap: 0 2rem;
+      grid-template-columns: 5.5rem 1fr;
+      gap: 0 0.5rem;
       margin-top: 1.25rem;
     }
 
