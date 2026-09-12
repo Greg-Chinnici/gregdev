@@ -1,0 +1,106 @@
+﻿Agent Concept: Gild 
+This agent is similar to Veto but I think there is still room for more than one utility intercepting agent. With Veto’s pickrate so low, maybe there is an alternate take that would make players use it more.
+Veto's Interceptor removes value from the round. Gild's Catcher moves it from one team to the other, and makes you pay a positional cost to collect. Anti-utility as theft rather than denial, with the counterplay built into the item leading the enemy to the player.
+
+
+Identity:
+A futuristic trapper and survivalist with an elegant, high-tech aesthetic. Their body and equipment are made of gold and tinted/smoky glass. Could also have a hunters cloak for a unique silhouette
+A refined aristocratic hunter who treats the battlefield as a playground. Fascinated by the elegance of nature, she developed golden drones that mimic creatures, allowing them to capture and preserve enemy technology as trophies. 
+Beautiful and patient, and Obsessed with collecting.
+
+
+She is actually being piloted remotely by her owner/operator back in England, so a lot of her personality leaks through. (Could have some fun internal dialogue/fighting with the bots mind)
+
+
+
+
+Visual Themes: 
+  
+  
+  
+  
+  
+
+
+
+Core Gameplay
+intercepts thrown projectiles and can use them once collected
+Catch -> Decide -> Risk the retrieval -> Repurpose the enemy's utility.
+probably first contact on defense (with late round suvivabilty), and a mid round lurker on offense
+
+
+Abilities V1 (Sentinel):
+mini demo vid on youtube
+E: Catcher [3 charges, 150 each]
+* A floating chandelier-like drone that creates a trigger area. Made of golden moths
+* Captures up to 3 thrown enemy projectiles.
+* Captured utility is stored inside the Catcher rather than immediately added to the player.
+* The player can recall the Catcher, causing its drones to physically fly back to them and transfer the captured utility into their inventory.
+* The recall visibly/sound-wise reveals the player's position, creating risk.
+* Aternatively, the player can release/detonate the captured item at the Catcher's location, sacrificing the ability to retrieve it.
+
+
+When an object is caught the moth will float above it contained in a glass sphere
+
+
+Q: Tinted Lens [2 charges, 200 each] 
+A specialized lens that temporarily reduces the duration of incoming flashes and stuns
+C: Internal Research [2 charges, 250 each]
+Absorb a caught grenade as a power source. your next bullet does 1.5x damage
+* bait the players to chase the drone, then deal massive damage in an ambush
+* only lasts 15 seconds
+
+
+X: Drone Swarm [6 Ult Points]
+Deploys a large swarm over an area, creating a much larger version of the Catcher's interception zone.
+* Intercepts and captures thrown enemy projectiles within the area.
+* Captured utility can either be recalled to the player or released/detonated at its current location.
+* Creates a high-risk/high-reward choice between safely using stolen utility in place or exposing your position to retrieve it.
+* Placed with a tablet like a brim smoke (no line of sight needed)
+
+
+Version 1 Postmortem
+1. Drone swarm is the boring part of the kit, maybe lean into the big game hunter aesthetic.
+2. Also I think that tinted lens is too strong since it makes most characters offenses useless
+3. Doing extra damage with internal research won't be known by the targets until they die
+
+
+
+
+Abilities V2 (Controller):
+demo vid 2 on youtube
+E: Catcher [1 free, 150 per extra (total 3)]
+* A floating chandelier-like drone that creates a trigger area. Made of golden moths
+* Captures up to 3 thrown enemy projectiles.
+* Captured utility is stored inside the Catcher rather than immediately added to the player.
+* The player can recall the Catcher, causing its drones to physically fly back to them and transfer the captured utility into their inventory.
+* The recall visibly/sound-wise reveals the player's position, creating risk.
+* Alternatively, the player can release/detonate the captured item at the Catcher's location, sacrificing the ability to retrieve it.
+
+
+Q: Hunting Blind [base charge 200, upgrade 150]
+flashes have reduced effect for any players behind it (on both teams)
+* Breakable glass wall 
+* she can temporarily make it hide things past 5m behind
+* not solid to players
+
+
+C: Auric Trail (wounded Tracking) [2 charges, 350 each]
+While active, the next enemy you deal damage to will leave a trail of blood behind them.
+The trail is visible to your whole team and lags a few seconds behind them, then fades
+
+
+X: Elephant Gun [6 Ult Points]
+A Double barrel blunderbuss. The left barrel is a slug shotgun dealing a one time 70 damage and then slows the target.  Right barrel will launch enemy in the air
+
+
+
+
+Version 2 Postmortem
+
+
+Overall I think her equipment fits the character better and is much less selfish.
+Its a very early/rough concept so I am open to suggestions
+
+
+Maybe need to rework how/what can be cuaght in the drones, and what happens to its traits when it is caught. instead of being to reuse that exact equipment, it could be a modifier to an existing piece of her kit.
