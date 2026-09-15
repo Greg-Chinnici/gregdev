@@ -4,6 +4,7 @@ date: 2026-09-06
 summary: "An anti-utility agent who steals util instead of deleting it, and two passes at a kit that makes you pay to collect it."
 tech: "Game Design, Technical Design, Prototyping"
 role: "Game Designer"
+video: "https://youtu.be/mY5xg9GoH9g"
 draft: false
 ---
 
