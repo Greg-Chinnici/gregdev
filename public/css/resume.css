@@ -1,7 +1,7 @@
     /* On the homepage, widen main to the resume's width so the intro,
        resume, and activity headers all start at the same left edge. */
-    main:has(#resume) {
-      max-width: 940px;
+    main:has(#resume) .main-inner {
+      max-width: 58.75rem;
     }
 
     .resume-grid {
@@ -17,6 +17,7 @@
     }
 
     .resume-label {
+      font-family: var(--font-ui);
       font-size: 0.7rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -43,7 +44,8 @@
     .resume-entry-title { font-weight: 600; }
 
     .resume-entry-date {
-      font-size: 0.75rem;
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
       opacity: 0.45;
       white-space: nowrap;
       flex-shrink: 0;
@@ -72,6 +74,7 @@
     }
 
     .resume-skill-group-name {
+      font-family: var(--font-ui);
       font-size: 0.72rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -98,7 +101,7 @@
 
     .latest-post-toast {
       position: fixed;
-      top: 5rem;
+      top: 6.5rem;
       right: 1.5rem;
       display: flex;
       align-items: center;
@@ -108,13 +111,12 @@
       background: var(--bg-elev);
       color: var(--fg);
       border: 1px solid var(--border);
-      border-radius: 6px;
       font-size: 0.85rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       z-index: 10;
     }
 
     .latest-post-toast-label {
+      font-family: var(--font-ui);
       font-size: 0.7rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;

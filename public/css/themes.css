@@ -3,17 +3,50 @@
    and append the name to THEMES in /js/theme.js.
 
    post heading vars (--post-h1 … --post-h6) default to --fg so headings
-   in rendered markdown blend in; override per-theme to colorize them. */
+   in rendered markdown blend in; override per-theme to colorize them.
+
+   layout vars: --frame-bg is the page around the center column, --stripe-1/2/3
+   color the 3/2/3 bar atop the header and main panel, --noise-opacity sets the
+   texture overlay (0 disables it). */
+
+/* delta.dev-style palette bases (oklch). shades are mixed toward white/black
+   so every theme block below can reference them. */
+:root {
+  --brand:   oklch(59% .185 32);
+  --cream:   oklch(60% .1 75);
+  --neutral: oklch(53% .02 259);
+
+  --brand-700:   color-mix(in oklch, var(--brand), black 30%);
+  --cream-50:    color-mix(in oklch, var(--cream), white 95%);
+  --cream-100:   color-mix(in oklch, var(--cream), white 88%);
+  --neutral-50:  color-mix(in oklch, var(--neutral), white 95%);
+  --neutral-300: color-mix(in oklch, var(--neutral), white 60%);
+  --neutral-600: color-mix(in oklch, var(--neutral), black 20%);
+  --neutral-700: color-mix(in oklch, var(--neutral), black 40%);
+  --neutral-800: color-mix(in oklch, var(--neutral), black 60%);
+  --neutral-900: color-mix(in oklch, var(--neutral), black 72%);
+  --neutral-950: color-mix(in oklch, var(--neutral), black 82%);
+
+  --font-body:    "iA Writer Quattro", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "IBM Plex Serif", ui-serif, Georgia, "Times New Roman", serif;
+  --font-ui:      "Lilex", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
 
 :root,
 [data-theme="light"] {
-  --bg:        #fafafa;
-  --bg-elev:   #ffffff;
-  --fg:        #1a1a1a;
-  --fg-muted:  #6a6a6a;
-  --accent:    #2a6df4;
-  --border:    #e3e3e3;
-  --code-bg:   #f0f0f0;
+  --frame-bg:  var(--cream-100);
+  --bg:        var(--cream-50);
+  --bg-elev:   color-mix(in oklch, var(--cream-100), white 50%);
+  --fg:        var(--neutral-800);
+  --fg-muted:  var(--neutral-600);
+  --accent:    var(--brand-700);
+  --border:    var(--neutral-300);
+  --code-bg:   var(--cream-100);
+
+  --stripe-1:  var(--brand);
+  --stripe-2:  var(--neutral-900);
+  --stripe-3:  #346dae;
+  --noise-opacity: 0.05;
 
   --post-h1:   var(--fg);
   --post-h2:   var(--fg);
@@ -35,13 +68,19 @@
 }
 
 [data-theme="dark"] {
-  --bg:        #0f1115;
-  --bg-elev:   #171a20;
-  --fg:        #e6e6e6;
-  --fg-muted:  #8a8f99;
-  --accent:    #7aa2f7;
-  --border:    #262a33;
-  --code-bg:   #1c1f26;
+  --frame-bg:  color-mix(in oklch, var(--neutral), black 90%);
+  --bg:        var(--neutral-950);
+  --bg-elev:   color-mix(in oklch, var(--neutral-950), white 4%);
+  --fg:        var(--neutral-50);
+  --fg-muted:  var(--neutral-300);
+  --accent:    color-mix(in oklch, var(--brand), white 20%);
+  --border:    color-mix(in oklch, var(--neutral-800), black 20%);
+  --code-bg:   color-mix(in oklch, var(--neutral-950), white 6%);
+
+  --stripe-1:  var(--brand);
+  --stripe-2:  var(--neutral-700);
+  --stripe-3:  #346dae;
+  --noise-opacity: 0.012;
 
   --post-h1:   var(--fg);
   --post-h2:   var(--fg);
@@ -71,6 +110,12 @@
   --border:    #414868;
   --code-bg:   #1f2335;
 
+  --frame-bg:  #16161e;
+  --stripe-1:  #7aa2f7; /* blue   */
+  --stripe-2:  #bb9af7; /* purple */
+  --stripe-3:  #7dcfff; /* cyan   */
+  --noise-opacity: 0.012;
+
   /* tokyo-night palette mapped to heading levels */
   --post-h1:   #7aa2f7; /* blue   */
   --post-h2:   #7dcfff; /* cyan   */
@@ -99,6 +144,12 @@
   --accent:    #000000;
   --border:    #000000;
   --code-bg:   #f4f4f4;
+
+  --frame-bg:  #ffffff;
+  --stripe-1:  #000000;
+  --stripe-2:  #888888;
+  --stripe-3:  #000000;
+  --noise-opacity: 0;
 
   --post-h1:   var(--fg);
   --post-h2:   var(--fg);
