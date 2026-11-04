@@ -135,6 +135,37 @@
         <hr class="resume-rule" />
 
         <span class="resume-label">projects</span>
+        <div class="resume-entry">
+                 <div class="resume-entry-header">
+                   <span class="resume-entry-title">
+                     <a href="https://thunderstore.io/c/valheim/p/gregdev/ObeliskHub/"
+                        target="_blank"
+                        rel="noopener noreferrer">Valheim Mod: ObeliskHub</a>
+                   </span>
+                   <span class="resume-entry-date">Oct 2026</span>
+                 </div>
+
+                 <p class="resume-entry-org">Personal Project · C#, Unity, BepInEx/Harmony · Client and server-side mod</p>
+
+                 <ul>
+                   <li>
+                     Built a procedural layout generator that builds a multiplayer fast-travel hub from the world's waypoints,
+                     placing each exit in a hall that matches its compass direction, across 5 architectural styles
+                   </li>
+                   <li>
+                     Wrote a validator that checks every layout before it's built (all floor reachable from the entrance,
+                     no overlapping rooms, every exit placed), backed by ASCII snapshot tests for each style
+                   </li>
+                   <li>
+                     Designed server-authoritative state sync over custom RPCs so every client builds the same hub, which
+                     rebuilds safely as players add or remove waypoints, even while others are inside
+                   </li>
+                   <li>
+                     Set up CI with GitHub Actions to build against the game's dedicated server via SteamCMD, run tests, and package
+                     releases for Thunderstore, plus a Docke and Linux
+                   </li>
+                 </ul>
+               </div>
 
         <div class="resume-body">
           <div class="resume-entry">
